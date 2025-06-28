@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const p = new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                // resolve('sucess')
+                reject(new Error('shibai'))
+            },2000)
+        })
+        console.log(p);
+        
+        p.then(result=>{
+            console.log(result)
+            console.log(p);
+            
+
+        }).catch(Error=>{
+            console.log(Error)
+            console.log(p);
+            
+        })
+        console.log(p);
+        
+    </script>
+</body>
+</html>

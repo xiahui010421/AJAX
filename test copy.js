@@ -1,0 +1,24 @@
+// 2. 解析 URL 中的 queryString，返回一个对象
+// 返回值示例：
+// {
+//   name: 'coder',
+//   age: '20'.
+//   callback: 'https://qiniu.com?name=test'
+// }
+const testURL = 'https://www.qiniu.com?name=coder&age=20&callback=https%3A%2F%2Fqiniu.com%3Fname%3Dtest';
+function parseQueryString(url) {
+    const query = url.split('?')[1] || '';
+    const result = {}
+
+    const parma = query.split('&');
+    parma.forEach(element => {
+        if(!element){
+            return
+        }
+        // console.log(parma)
+        const [key,value] = element.split('=')
+        result[decodeURIComponent(key)] = decodeURIComponent(value || '')
+    });
+    return result
+}
+console.log(parseQueryString(testURL))

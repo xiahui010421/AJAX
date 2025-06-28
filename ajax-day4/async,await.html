@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+    <span>省份：</span>
+    <select>
+      <option class="province"></option>
+    </select>
+    <span>城市：</span>
+    <select>
+      <option class="city"></option>
+    </select>
+    <span>地区：</span>
+    <select>
+      <option class="area"></option>
+    </select>
+  </form>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        //捕获错误
+        async function getData() {
+            const pobj = await axios({url:'http://hmajax.itheima.net/api/province'})
+            const pname = pobj.data.list[0]
+            const cobj = await axios({url:'http://hmajax.itheima.net/api/city',params:{pname}})
+            const cname = cobj.data.list[0]
+            const aobj = await axios({url:'http://hmajax.itheima.net/api/area',params:{pname,cname}})
+            const aname = aobj.data.list[0]
+            console.log(aobj)
+            document.querySelector('.province').innerHTML = pname
+            document.querySelector('.city').innerHTML = cname
+            document.querySelector('.area').innerHTML = aname
+
+        }
+        getData()
+    </script>
+</body>
+</html>
